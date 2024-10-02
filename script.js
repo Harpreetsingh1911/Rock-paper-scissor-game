@@ -11,8 +11,8 @@ let result = document.querySelector(".result");
 const rock = "✊";
 const paper = "🤚";
 const secissor = "✌️";
-
-rockbtn.addEventListener("click", function () {
+const iconList = [rock, paper, secissor];
+function calculateResult(userChoise, computer) {
   UserhandIcon.innerText = "🤜";
   computerhandIcon.innerText = "🤛";
   UserhandIcon.classList.add("shakeUserHands");
@@ -20,69 +20,28 @@ rockbtn.addEventListener("click", function () {
   setTimeout(() => {
     UserhandIcon.classList.remove("shakeUserHands");
     computerhandIcon.classList.remove("shakeComputerHands");
-    UserhandIcon.innerText = rock;
+    UserhandIcon.innerText = userChoise;
     const computerchoise = Math.floor(Math.random() * 3);
-    if (computerchoise == 0) {
-      computerhandIcon.innerText = rock;
+    computerhandIcon.innerText = iconList[computerchoise];
+    if (userChoise.innerText == computerhandIcon.innerText) {
       result.innerText = "Draw";
-    } else if (computerchoise == 1) {
-      computerhandIcon.innerText = paper;
+    } else if (computerhandIcon.innerText == computer) {
       result.innerText = "Computer Win";
       ComputerScore.innerText = +ComputerScore.innerText + 1;
     } else {
-      computerhandIcon.innerText = secissor;
       result.innerText = "User Win";
       userScore.innerText = +userScore.innerText + 1;
     }
   }, 2000);
+}
+rockbtn.addEventListener("click", function () {
+  calculateResult(rock, paper);
 });
 
 paperbtn.addEventListener("click", function () {
-  UserhandIcon.innerText = "🤜";
-  computerhandIcon.innerText = "🤛";
-  UserhandIcon.classList.add("shakeUserHands");
-  computerhandIcon.classList.add("shakeComputerHands");
-  setTimeout(() => {
-    UserhandIcon.classList.remove("shakeUserHands");
-    computerhandIcon.classList.remove("shakeComputerHands");
-    UserhandIcon.innerText = paper;
-    const computerchoise = Math.floor(Math.random() * 3);
-    if (computerchoise == 0) {
-      computerhandIcon.innerText = rock;
-      result.innerText = "user win";
-      userScore.innerText = +userScore.innerText + 1;
-    } else if (computerchoise == 1) {
-      computerhandIcon.innerText = paper;
-      result.innerText = "Draw";
-    } else {
-      computerhandIcon.innerText = secissor;
-      result.innerText = "computer win";
-      ComputerScore.innerText = +ComputerScore.innerText + 1;
-    }
-  }, 2000);
+  calculateResult(paper, secissor);
 });
 
 secissorbtn.addEventListener("click", function () {
-  UserhandIcon.innerText = "🤜";
-  computerhandIcon.innerText = "🤛";
-  UserhandIcon.classList.add("shakeUserHands");
-  computerhandIcon.classList.add("shakeComputerHands");
-  setTimeout(() => {
-    UserhandIcon.classList.remove("shakeUserHands");
-    computerhandIcon.classList.remove("shakeComputerHands");
-    UserhandIcon.innerText = secissor;
-    const computerchoise = Math.floor(Math.random() * 3);
-    if (computerchoise == 0) {
-      computerhandIcon.innerText = rock;
-      result.innerText = "computer win";
-      ComputerScore.innerText = +ComputerScore.innerText + 1;
-    } else if (computerchoise == 1) {
-      computerhandIcon.innerText = paper;
-      userScore.innerText = +userScore.innerText + 1;
-      result.innerText = "user win";
-    } else {
-      computerhandIcon.innerText = secissor;
-      result.innerText = "Draw";
-    }
-  }, 2000);
+  calculateResult(secissor, rock);
 });
