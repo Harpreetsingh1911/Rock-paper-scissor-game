@@ -12,20 +12,24 @@ const rock = "✊";
 const paper = "🤚";
 const secissor = "✌️";
 const iconList = [rock, paper, secissor];
-function calculateResult(userChoise, computer) {
+function calculateResult(userChoise, computerChoice) {
   UserhandIcon.innerText = "🤜";
   computerhandIcon.innerText = "🤛";
   UserhandIcon.classList.add("shakeUserHands");
   computerhandIcon.classList.add("shakeComputerHands");
+
   setTimeout(() => {
     UserhandIcon.classList.remove("shakeUserHands");
     computerhandIcon.classList.remove("shakeComputerHands");
+
     UserhandIcon.innerText = userChoise;
-    const computerchoise = Math.floor(Math.random() * 3);
-    computerhandIcon.innerText = iconList[computerchoise];
-    if (userChoise.innerText == computerhandIcon.innerText) {
+    const computerchoiseIndex = Math.floor(Math.random() * 3);
+    const computerHand = iconList[computerchoiseIndex];
+    computerhandIcon.innerText = computerHand;
+
+    if (userChoise === computerHand) {
       result.innerText = "Draw";
-    } else if (computerhandIcon.innerText == computer) {
+    } else if (computerHand === computerChoice) {
       result.innerText = "Computer Win";
       ComputerScore.innerText = +ComputerScore.innerText + 1;
     } else {
